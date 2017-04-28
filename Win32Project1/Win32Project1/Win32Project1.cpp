@@ -15,6 +15,14 @@ HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 HWND groupButton;
+HWND periodButton;
+HWND weightButton;
+HWND numberButton;
+HWND chemsymButton;
+HWND chemnameButton;
+HWND exitButton;
+
+
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -41,7 +49,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	for (int i = 0; i < 107; i++) {
 		elements[i].getFileData(i + 1);
 	}
-	/*for (int i = 0; i < 107; i++) {
+	for (int i = 0; i < 107; i++) {
 		cout << elements[i].getAtomicNumber() << endl;
 		cout << elements[i].getChemName() << endl;
 		cout << elements[i].getChemSum() << endl;
@@ -55,7 +63,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		cout << elements[i].getOxState() << endl;
 		cout << elements[i].getFIonP() << endl;
 		cout << elements[i].getEAffinity() << endl << endl;
-	}*/
+	}
 
 	for (int i = 0; i < 107; i++) {
 	//	elements[i].searchbyGroup(1, elements);
@@ -174,7 +182,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND groupButton = CreateWindow(
+	{groupButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"GROUP",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -188,7 +196,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND periodButton = CreateWindow(
+	{periodButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"PERIOD",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -202,7 +210,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND weightButton = CreateWindow(
+	{weightButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"Atomic Weight",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -216,7 +224,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND numberButton = CreateWindow(
+	{numberButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"Atomic Number",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -230,7 +238,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND chemsymButton = CreateWindow(
+	{chemsymButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"Chemical Symbol",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -244,7 +252,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND chemnameButton = CreateWindow(
+	{chemnameButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"Element Name",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -258,7 +266,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
 	}
-	{HWND exitButton = CreateWindow(
+	{exitButton = CreateWindow(
 		L"BUTTON",  // Predefined class; Unicode assumed 
 		L"EXIT",      // Button text 
 		WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
@@ -267,7 +275,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 		100,        // Button width
 		100,        // Button height
 		hWnd,     // Parent window
-		(HMENU)2,       // No menu.
+		(HMENU)7,       // No menu.
 		NULL,
 		//(HINSTANCE)GetWindowLong(hwnd, GWL_HINSTANCE),
 		NULL);      // Pointer not needed.
@@ -275,6 +283,42 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
     case WM_COMMAND:
         {
+			int wmHi = HIWORD(wParam);
+			switch (wmHi) {
+			case BN_CLICKED: {
+				switch (wParam) {
+				case 1: {
+					cout << "Group Button Clicked " << endl;
+				}
+						break;
+				case 2: {
+					cout << "Period Button Clicked " << endl;
+				}
+						break;
+				case 3: {
+					cout << "Weight Button Clicked " << endl;
+				}
+						break;
+				case 4: {
+					cout << "number Button Clicked " << endl;
+				}
+						break;
+				case 5: {
+					cout << "Chemsym Button Clicked " << endl;
+				}
+						break;
+				case 6: {
+					cout << "Chemname Button Clicked " << endl;
+				}
+						break;
+				case 7: {
+					cout << "Exit Button Clicked " << endl;
+				}
+						break;
+				}
+			}
+				cout << "BN CLICKED " << lParam << endl;
+			}
             int wmId = LOWORD(wParam);
             // Parse the menu selections:
             switch (wmId)
@@ -288,6 +332,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
             }
+
         }
 		switch(LOWORD(wParam)) {
 		case 1: 
@@ -321,6 +366,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             EndPaint(hWnd, &ps);
         }
         break;
+
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
